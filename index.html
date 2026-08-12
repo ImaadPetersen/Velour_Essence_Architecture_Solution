@@ -3,18 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Velour Essence | Solution Architecture</title>
+<title>Velour Essence | Solution Architecture & User Stories</title>
 <style>
   :root {
-    --bg-dark: #111111;
-    --card-bg: #181818;
-    --card-inner: #202020;
-    --accent-gold: #C9A227;
-    --accent-gold-light: #E0B838;
-    --text-light: #F8F4EA;
-    --text-muted: #A0A0A0;
-    --border-color: #333333;
-    --border-gold: #C9A227;
+    --velour-burgundy: #3D0C13;
+    --signature-gold: #C5A059;
+    --cream-canvas: #FAF7F2;
+    --rich-silk: #F4EAD8;
+    --deep-ink: #2A2018;
+    --muted-gray: #7A7168;
+    --card-border: #E2D6C3;
   }
 
   * {
@@ -24,10 +22,10 @@
   }
 
   body {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
+    background-color: var(--cream-canvas);
+    color: var(--deep-ink);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    padding: 20px;
+    padding: 24px;
     display: flex;
     justify-content: center;
   }
@@ -35,75 +33,80 @@
   .diagram-container {
     max-width: 1400px;
     width: 100%;
-    border: 2px solid var(--border-gold);
-    background-color: #0d0d0d;
-    padding: 24px;
-    box-shadow: 0 0 30px rgba(201, 162, 39, 0.15);
+    border: 2px solid var(--signature-gold);
+    background-color: var(--cream-canvas);
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(61, 12, 19, 0.08);
   }
 
   /* Header */
   header {
     text-align: center;
-    border-bottom: 2px solid var(--accent-gold);
-    padding-bottom: 15px;
-    margin-bottom: 20px;
+    border-bottom: 2px solid var(--signature-gold);
+    padding-bottom: 18px;
+    margin-bottom: 24px;
+    background-color: var(--rich-silk);
+    padding-top: 20px;
+    border-radius: 4px;
   }
 
   header h1 {
-    color: var(--accent-gold);
-    font-size: 26pt;
+    color: var(--velour-burgundy);
+    font-size: 28pt;
     letter-spacing: 4px;
     text-transform: uppercase;
   }
 
   header h2 {
     font-size: 11pt;
-    color: var(--text-light);
+    color: var(--deep-ink);
     letter-spacing: 1.5px;
-    font-weight: 400;
-    margin-top: 5px;
+    font-weight: 600;
+    margin-top: 6px;
+    text-transform: uppercase;
   }
 
   header p {
-    font-size: 9pt;
-    color: var(--text-muted);
+    font-size: 9.5pt;
+    color: var(--muted-gray);
     font-style: italic;
     margin-top: 4px;
   }
 
-  /* Main Diagram Grid Structure */
+  /* Architecture Grid Structure */
   .architecture-grid {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
   }
 
   .top-row-grid {
     display: grid;
     grid-template-columns: 1fr 3.5fr 1fr;
-    gap: 12px;
+    gap: 14px;
   }
 
   /* Block Sections */
   .section-box {
-    border: 1px solid var(--border-color);
-    background-color: var(--card-bg);
-    padding: 12px;
+    border: 1px solid var(--card-border);
+    background-color: var(--rich-silk);
+    padding: 14px;
+    border-radius: 4px;
   }
 
   .section-title {
-    color: var(--accent-gold);
-    font-size: 10pt;
+    color: var(--velour-burgundy);
+    font-size: 10.5pt;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1.5px solid var(--signature-gold);
     padding-bottom: 6px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     text-align: center;
   }
 
-  /* 2. Core Platform Services Columns */
+  /* Core Services Subgrid */
   .services-subgrid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -111,46 +114,44 @@
   }
 
   .service-col {
-    background-color: var(--card-inner);
-    border: 1px solid var(--border-color);
+    background-color: var(--cream-canvas);
+    border: 1px solid var(--card-border);
     padding: 8px;
+    border-radius: 3px;
   }
 
   .service-col-title {
-    color: var(--accent-gold-light);
+    color: var(--velour-burgundy);
     font-size: 8.5pt;
     font-weight: bold;
     text-transform: uppercase;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--signature-gold);
     padding-bottom: 4px;
     margin-bottom: 8px;
     text-align: center;
   }
 
-  /* Cards / List Items */
+  /* Item Cards */
   .item-card {
-    background-color: #141414;
-    border: 1px solid #282828;
+    background-color: var(--rich-silk);
+    border: 1px solid var(--card-border);
     padding: 6px 8px;
     margin-bottom: 6px;
-    font-size: 8pt;
+    font-size: 8.5pt;
+    border-radius: 3px;
   }
 
   .item-card strong {
-    color: var(--text-light);
+    color: var(--deep-ink);
     display: block;
   }
 
   .item-card span {
-    color: var(--text-muted);
+    color: var(--muted-gray);
     font-size: 7.5pt;
   }
 
-  /* Layer Grids (Data, Infrastructure, Integrations) */
-  .layer-row {
-    width: 100%;
-  }
-
+  /* Layer Grids */
   .grid-5-col {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -163,7 +164,55 @@
     gap: 8px;
   }
 
-  /* Bottom Ribbon Sections */
+  /* User Stories Table Section */
+  .user-stories-section {
+    margin-top: 8px;
+  }
+
+  .stories-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.5pt;
+  }
+
+  .stories-table th {
+    background-color: var(--velour-burgundy);
+    color: var(--cream-canvas);
+    text-align: left;
+    padding: 8px 10px;
+    border: 1px solid var(--velour-burgundy);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .stories-table td {
+    padding: 8px 10px;
+    border: 1px solid var(--card-border);
+    background-color: var(--cream-canvas);
+    vertical-align: top;
+  }
+
+  .stories-table tr:nth-child(even) td {
+    background-color: var(--rich-silk);
+  }
+
+  .us-badge {
+    background-color: var(--signature-gold);
+    color: var(--velour-burgundy);
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 7.5pt;
+    display: inline-block;
+  }
+
+  .role-badge {
+    color: var(--velour-burgundy);
+    font-weight: 600;
+  }
+
+  /* Footer Benefits Ribbon */
   .cross-cutting-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -171,31 +220,32 @@
   }
 
   .benefit-card {
-    background-color: #1a1810;
-    border: 1px solid var(--accent-gold);
+    background-color: var(--rich-silk);
+    border: 1px solid var(--signature-gold);
     text-align: center;
-    padding: 8px;
+    padding: 10px;
+    border-radius: 3px;
   }
 
   .benefit-card strong {
-    color: var(--accent-gold);
+    color: var(--velour-burgundy);
     font-size: 8.5pt;
     display: block;
     text-transform: uppercase;
   }
 
   .benefit-card span {
-    color: var(--text-light);
+    color: var(--deep-ink);
     font-size: 7.5pt;
   }
 
   footer {
     text-align: center;
-    font-size: 8pt;
-    color: var(--text-muted);
-    margin-top: 15px;
-    border-top: 1px solid var(--border-color);
-    padding-top: 10px;
+    font-size: 8.5pt;
+    color: var(--muted-gray);
+    margin-top: 20px;
+    border-top: 1px solid var(--card-border);
+    padding-top: 12px;
   }
 
   @media (max-width: 1024px) {
@@ -212,7 +262,7 @@
   <!-- HEADER -->
   <header>
     <h1>Velour Essence</h1>
-    <h2>SOLUTION ARCHITECTURE PLATFORM BLUEPRINT</h2>
+    <h2>SOLUTION ARCHITECTURE & ENTERPRISE USER STORIES</h2>
     <p>A scalable, secure, and luxury-tier personalized perfumery platform powered by Supabase & Edge Infrastructure</p>
   </header>
 
@@ -224,7 +274,6 @@
       <!-- 1. INPUTS / SOURCES -->
       <div class="section-box">
         <div class="section-title">1. Inputs / Sources</div>
-        
         <div class="item-card">
           <strong>Social Media Ads</strong>
           <span>Instagram & TikTok Funnels, Meta Ads</span>
@@ -289,10 +338,9 @@
       <!-- 3. OUTPUTS / CLIENTS -->
       <div class="section-box">
         <div class="section-title">3. Outputs / Clients</div>
-        
         <div class="item-card">
           <strong>Web Application</strong>
-          <span>GitHub Pages SPA (#111111 / #C9A227)</span>
+          <span>GitHub Pages SPA (#FAF7F2 / #3D0C13)</span>
         </div>
         <div class="item-card">
           <strong>Customer Touchpoints</strong>
@@ -307,7 +355,7 @@
     </div>
 
     <!-- 4. DATA & PLATFORM LAYER -->
-    <div class="section-box layer-row">
+    <div class="section-box">
       <div class="section-title">4. Data & Platform Layer (Supabase BaaS Platform)</div>
       <div class="grid-5-col">
         <div class="item-card">
@@ -333,9 +381,9 @@
       </div>
     </div>
 
-    <!-- 5. INFRASTRUCTURE LAYER -->
-    <div class="section-box layer-row">
-      <div class="section-title">5. Infrastructure Layer</div>
+    <!-- 5. INFRASTRUCTURE & INTEGRATIONS LAYER -->
+    <div class="section-box">
+      <div class="section-title">5. Infrastructure & Integrations Layer</div>
       <div class="grid-4-col">
         <div class="item-card">
           <strong>GitHub Pages Edge Hosting</strong>
@@ -351,36 +399,120 @@
         </div>
         <div class="item-card">
           <strong>PayFast Gateway</strong>
-          <span>PCI-DSS compliant localized payment pipeline</span>
+          <span>Credit Cards, Instant EFT & Zapper payments</span>
         </div>
       </div>
     </div>
 
-    <!-- 6. INTEGRATIONS LAYER -->
-    <div class="section-box layer-row">
-      <div class="section-title">6. Integrations Layer</div>
-      <div class="grid-4-col">
-        <div class="item-card">
-          <strong>PayFast Gateway</strong>
-          <span>Credit Cards, Instant EFT & Zapper</span>
-        </div>
-        <div class="item-card">
-          <strong>Google Analytics 4 (GA4)</strong>
-          <span>Funnel tracking & scent quiz drop-offs</span>
-        </div>
-        <div class="item-card">
-          <strong>WhatsApp Business API</strong>
-          <span>Order status & blending dispatch alerts</span>
-        </div>
-        <div class="item-card">
-          <strong>Social Pixel Networks</strong>
-          <span>Meta & TikTok ads pixel retargeting</span>
-        </div>
-      </div>
+    <!-- 6. ENTERPRISE USER STORIES SECTION -->
+    <div class="section-box user-stories-section">
+      <div class="section-title">6. Enterprise User Stories</div>
+      <table class="stories-table">
+        <thead>
+          <tr>
+            <th style="width: 8%;">ID</th>
+            <th style="width: 12%;">User Role</th>
+            <th style="width: 40%;">User Story Requirement</th>
+            <th style="width: 40%;">Business Value / Acceptance Criteria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="us-badge">US-01</span></td>
+            <td><span class="role-badge">Guest</span></td>
+            <td>Take an interactive olfactory profiling quiz</td>
+            <td>Matches personal scent preferences to recommended fragrance families (Woody, Floral, Citrus, Oriental).</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-02</span></td>
+            <td><span class="role-badge">Customer</span></td>
+            <td>Mix top, heart, and base notes in a custom creation studio</td>
+            <td>Calculates formula ratios, displays real-time price updates, and renders bespoke bottle previews.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-03</span></td>
+            <td><span class="role-badge">Customer</span></td>
+            <td>Create an account using email and password via Supabase Auth</td>
+            <td>Securely registers profile in Supabase PostgreSQL and issues JWT session tokens for persistent login.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-04</span></td>
+            <td><span class="role-badge">Customer</span></td>
+            <td>Log in securely to view personal dashboard</td>
+            <td>Grants access to order history, saved perfume formulas, and current loyalty point balance.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-05</span></td>
+            <td><span class="role-badge">Customer</span></td>
+            <td>Add standard products and custom fragrance blends to shopping cart</td>
+            <td>Persists cart state in browser local storage and syncs items smoothly into checkout.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-06</span></td>
+            <td><span class="role-badge">Customer</span></td>
+            <td>Complete checkout using PayFast payment gateway</td>
+            <td>Supports Credit Card, Instant EFT, and Zapper payments with automated ITN payment callback verification.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-07</span></td>
+            <td><span class="role-badge">Customer</span></td>
+            <td>Track custom perfume blending status in real time</td>
+            <td>Displays live status updates ("Pending" &gt; "Blending" &gt; "Dispatched") via Supabase Realtime subscriptions.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-08</span></td>
+            <td><span class="role-badge">Customer</span></td>
+            <td>Receive transactional status notifications via WhatsApp</td>
+            <td>Automated WhatsApp Business API triggers message alerts upon dispatch and delivery.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-09</span></td>
+            <td><span class="role-badge">Member</span></td>
+            <td>Earn loyalty points on every completed transaction</td>
+            <td>Automatically updates loyalty tier (Bronze, Silver, Gold, Velvet Elite) based on cumulative spend.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-10</span></td>
+            <td><span class="role-badge">Member</span></td>
+            <td>Save custom fragrance formulas under personalized names</td>
+            <td>Stores note compositions in PostgreSQL JSONB column for seamless one-click re-ordering.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-11</span></td>
+            <td><span class="role-badge">Admin</span></td>
+            <td>Access real-time order fulfillment management dashboard</td>
+            <td>Allows laboratory staff to view pending custom formula mix sheets and update dispatch status.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-12</span></td>
+            <td><span class="role-badge">Admin</span></td>
+            <td>Manage product catalog, fragrance notes stock, and prices</td>
+            <td>Updates PostgreSQL products and notes tables instantly through admin RLS privileges.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-13</span></td>
+            <td><span class="role-badge">Marketer</span></td>
+            <td>Track visitor conversion funnels via Google Analytics 4</td>
+            <td>Captures custom events for quiz completions, studio creations, cart additions, and sales conversions.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-14</span></td>
+            <td><span class="role-badge">Customer</span></td>
+            <td>Save preferred delivery addresses in profile settings</td>
+            <td>Stores structured JSON address data to accelerate future checkout sessions.</td>
+          </tr>
+          <tr>
+            <td><span class="us-badge">US-15</span></td>
+            <td><span class="role-badge">Admin</span></td>
+            <td>Manually adjust customer loyalty points or apply VIP perks</td>
+            <td>Enables customer support representatives to resolve inquiries or issue discretionary rewards.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <!-- 7. CROSS-CUTTING CONCERNS / ARCHITECTURE BENEFITS -->
-    <div class="section-box layer-row">
+    <!-- 7. QUALITY REQUIREMENTS & BENEFITS -->
+    <div class="section-box">
       <div class="section-title">7. Architecture Quality Requirements & Benefits</div>
       <div class="cross-cutting-grid">
         <div class="benefit-card">
