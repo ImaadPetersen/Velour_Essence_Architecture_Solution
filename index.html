@@ -3,7 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Velour Essence | Solution Architecture & User Stories</title>
+<title>Velour Essence | Comprehensive Solution Architecture</title>
+<!-- Mermaid.js for Rendering Architecture & Sequence Diagrams -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#F4EAD8',
+      primaryTextColor: '#2A2018',
+      primaryBorderColor: '#C5A059',
+      lineColor: '#3D0C13',
+      secondaryColor: '#FAF7F2',
+      tertiaryColor: '#3D0C13'
+    }
+  });
+</script>
 <style>
   :root {
     --velour-burgundy: #3D0C13;
@@ -28,6 +44,7 @@
     padding: 24px;
     display: flex;
     justify-content: center;
+    line-height: 1.5;
   }
 
   .diagram-container {
@@ -73,40 +90,105 @@
     margin-top: 4px;
   }
 
-  /* Architecture Grid Structure */
-  .architecture-grid {
+  /* Section Containers */
+  .section-box {
+    border: 1px solid var(--card-border);
+    background-color: var(--rich-silk);
+    padding: 18px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    color: var(--velour-burgundy);
+    font-size: 12pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1.5px solid var(--signature-gold);
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+  }
+
+  /* Mermaid Diagram Wrappers */
+  .mermaid-wrapper {
+    background-color: var(--cream-canvas);
+    border: 1px solid var(--card-border);
+    padding: 16px;
+    border-radius: 4px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 12px;
+    overflow-x: auto;
+  }
+
+  .diagram-explanation {
+    font-size: 9pt;
+    color: var(--deep-ink);
+    background-color: var(--cream-canvas);
+    border-left: 3px solid var(--signature-gold);
+    padding: 10px 14px;
+    margin-top: 8px;
+  }
+
+  /* Grid Layouts */
+  .grid-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 16px;
   }
 
+  .grid-3-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .grid-5-col {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+
+  .grid-4-col {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  /* Feature Lists & Cards */
+  .feature-card {
+    background-color: var(--cream-canvas);
+    border: 1px solid var(--card-border);
+    padding: 12px;
+    border-radius: 4px;
+  }
+
+  .feature-card h4 {
+    color: var(--velour-burgundy);
+    font-size: 10pt;
+    margin-bottom: 6px;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 4px;
+  }
+
+  .feature-card ul {
+    list-style-type: square;
+    padding-left: 18px;
+    font-size: 8.5pt;
+  }
+
+  .feature-card li {
+    margin-bottom: 4px;
+  }
+
+  /* Architecture Top Row Layout */
   .top-row-grid {
     display: grid;
     grid-template-columns: 1fr 3.5fr 1fr;
     gap: 14px;
   }
 
-  /* Block Sections */
-  .section-box {
-    border: 1px solid var(--card-border);
-    background-color: var(--rich-silk);
-    padding: 14px;
-    border-radius: 4px;
-  }
-
-  .section-title {
-    color: var(--velour-burgundy);
-    font-size: 10.5pt;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 1.5px solid var(--signature-gold);
-    padding-bottom: 6px;
-    margin-bottom: 12px;
-    text-align: center;
-  }
-
-  /* Core Services Subgrid */
   .services-subgrid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -131,7 +213,6 @@
     text-align: center;
   }
 
-  /* Item Cards */
   .item-card {
     background-color: var(--rich-silk);
     border: 1px solid var(--card-border);
@@ -151,24 +232,7 @@
     font-size: 7.5pt;
   }
 
-  /* Layer Grids */
-  .grid-5-col {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-  }
-
-  .grid-4-col {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-  }
-
-  /* User Stories Table Section */
-  .user-stories-section {
-    margin-top: 8px;
-  }
-
+  /* User Stories Table */
   .stories-table {
     width: 100%;
     border-collapse: collapse;
@@ -183,7 +247,6 @@
     border: 1px solid var(--velour-burgundy);
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
   }
 
   .stories-table td {
@@ -204,15 +267,9 @@
     padding: 2px 6px;
     border-radius: 2px;
     font-size: 7.5pt;
-    display: inline-block;
   }
 
-  .role-badge {
-    color: var(--velour-burgundy);
-    font-weight: 600;
-  }
-
-  /* Footer Benefits Ribbon */
+  /* Cross Cutting Benefits */
   .cross-cutting-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -249,7 +306,7 @@
   }
 
   @media (max-width: 1024px) {
-    .top-row-grid, .services-subgrid, .grid-5-col, .grid-4-col, .cross-cutting-grid {
+    .top-row-grid, .services-subgrid, .grid-5-col, .grid-4-col, .grid-3-col, .grid-2-col, .cross-cutting-grid {
       grid-template-columns: 1fr;
     }
   }
@@ -262,282 +319,455 @@
   <!-- HEADER -->
   <header>
     <h1>Velour Essence</h1>
-    <h2>SOLUTION ARCHITECTURE & ENTERPRISE USER STORIES</h2>
-    <p>A scalable, secure, and luxury-tier personalized perfumery platform powered by Supabase & Edge Infrastructure</p>
+    <h2>FULL SYSTEM ARCHITECTURE & TECHNICAL BLUEPRINT</h2>
+    <p>Custom Luxury Perfumery Platform &mdash; Model Architecture, C4 Diagrams & Operational Specifications</p>
   </header>
 
-  <div class="architecture-grid">
-    
-    <!-- TOP ROW: INPUTS, CORE SERVICES, OUTPUTS -->
+  <!-- 1. DOMAIN & PLATFORM TYPE -->
+  <div class="section-box">
+    <div class="section-title">1. Domain & Digital Platform Specifications</div>
+    <div class="grid-3-col">
+      <div class="feature-card">
+        <h4>Industry Domain</h4>
+        <p style="font-size: 8.5pt;"><strong>Luxury E-Commerce & Personalised Fragrance (Direct-to-Consumer):</strong> Operates at the intersection of haute parfumerie and bespoke digital customization, allowing consumers to digitally formulate, preview, and purchase custom luxury fragrances online.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Digital Platform Classification</h4>
+        <p style="font-size: 8.5pt;"><strong>Serverless Single-Page Web Application (SPA):</strong> Built using a zero-framework Vanilla JavaScript core decoupled from backend services, hosted on Edge CDNs, and connected via APIs to backend-as-a-service infrastructure.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Target Audience & Reach</h4>
+        <p style="font-size: 8.5pt;"><strong>VIP Consumer & Retail Direct:</strong> High-value direct consumers seeking signature scents, social media inbound shoppers (Instagram/TikTok), and enterprise laboratory staff managing fulfillment.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. USER & ADMIN FEATURES -->
+  <div class="section-box">
+    <div class="section-title">2. Customer & Administrative Feature Matrices</div>
+    <div class="grid-2-col">
+      <div class="feature-card">
+        <h4>User-Facing Features (Customer Experience)</h4>
+        <ul>
+          <li><strong>Olfactory Profiling Quiz:</strong> Interactive preference quiz matching users to fragrance families (Woody, Floral, Citrus, Oriental).</li>
+          <li><strong>Fragrance Creation Studio:</strong> Real-time blending interface for adjusting Top, Heart, and Base note volume ratios.</li>
+          <li><strong>Bespoke Bottle Customization:</strong> Real-time rendering of custom bottle engravings and size selections.</li>
+          <li><strong>Persistent Cart & VIP Checkout:</strong> LocalStorage cart state integrated with PayFast gateway (Credit Cards, Instant EFT, Zapper).</li>
+          <li><strong>Personal Recipe Vault:</strong> Ability to name and save custom fragrance compositions for quick one-click re-ordering.</li>
+          <li><strong>Real-Time Order Tracking:</strong> WebSocket-powered status updates (Pending &rarr; Blending &rarr; Dispatched).</li>
+          <li><strong>Velvet Elite Loyalty:</strong> Automated tier progression (Bronze &rarr; Velvet Elite) and VIP perk redemption.</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4>Administrative Features (Laboratory & Management)</h4>
+        <ul>
+          <li><strong>Real-Time Mix Sheet Dashboard:</strong> Live laboratory queue displaying exact note ratios for bespoke fragrance blending.</li>
+          <li><strong>Inventory & Stock Sync:</strong> Stock tracking for individual fragrance notes, raw materials, and custom bottle stock.</li>
+          <li><strong>Order Dispatch Management:</strong> One-click fulfillment status updates triggering automated customer notifications.</li>
+          <li><strong>Transactional WhatsApp Notifications:</strong> Integrated API triggers dispatching WhatsApp alerts upon order fulfillment.</li>
+          <li><strong>Customer & VIP Loyalty Management:</strong> Discretionary loyalty points adjustments and VIP reward overrides.</li>
+          <li><strong>Analytics & Conversion Tracking:</strong> GA4 conversion funnel analysis tracking quiz drop-offs and sales conversions.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MODEL ARCHITECTURE / HIGH LEVEL BLUEPRINT -->
+  <div class="section-box">
+    <div class="section-title">3. Platform Model Architecture Blueprint</div>
     <div class="top-row-grid">
-      
-      <!-- 1. INPUTS / SOURCES -->
-      <div class="section-box">
-        <div class="section-title">1. Inputs / Sources</div>
-        <div class="item-card">
-          <strong>Social Media Ads</strong>
-          <span>Instagram & TikTok Funnels, Meta Ads</span>
-        </div>
-        <div class="item-card">
-          <strong>Direct Web Clients</strong>
-          <span>Desktop Browsers (Chrome, Safari, Edge)</span>
-        </div>
-        <div class="item-card">
-          <strong>Mobile Browsers</strong>
-          <span>iOS Safari & Android Chrome Viewports</span>
-        </div>
-        <div class="item-card">
-          <strong>Direct & Marketing</strong>
-          <span>VIP Referral Links & QR Code Campaigns</span>
+      <!-- 1. INPUTS -->
+      <div class="item-card" style="background-color: var(--cream-canvas);">
+        <strong style="color: var(--velour-burgundy); text-transform: uppercase;">1. Inputs / Sources</strong>
+        <div style="margin-top: 6px;">
+          <div class="item-card"><strong>Social Media Ads</strong><span>Meta & TikTok Creator Funnels</span></div>
+          <div class="item-card"><strong>Direct Web Clients</strong><span>Desktop & Mobile Browsers</span></div>
+          <div class="item-card"><strong>Direct & Marketing</strong><span>VIP Referral & QR Campaigns</span></div>
         </div>
       </div>
 
-      <!-- 2. CORE PLATFORM SERVICES -->
-      <div class="section-box">
-        <div class="section-title">2. Core Platform Services</div>
+      <!-- 2. CORE SERVICES -->
+      <div class="item-card" style="background-color: var(--cream-canvas);">
+        <strong style="color: var(--velour-burgundy); text-transform: uppercase; text-align: center; display: block; margin-bottom: 6px;">2. Core Platform Services</strong>
         <div class="services-subgrid">
-          
           <div class="service-col">
             <div class="service-col-title">2.1 Profiling</div>
             <div class="item-card">Olfactory Quiz</div>
             <div class="item-card">Scent Engine</div>
-            <div class="item-card">Persona Matcher</div>
           </div>
-
           <div class="service-col">
             <div class="service-col-title">2.2 Studio</div>
             <div class="item-card">Note Blender</div>
-            <div class="item-card">Ratio Adjuster</div>
-            <div class="item-card">Bottle Engraving</div>
+            <div class="item-card">Engraver</div>
           </div>
-
           <div class="service-col">
             <div class="service-col-title">2.3 Commerce</div>
-            <div class="item-card">Product Catalog</div>
-            <div class="item-card">Persistent Cart</div>
+            <div class="item-card">Catalog</div>
             <div class="item-card">PayFast Router</div>
           </div>
-
           <div class="service-col">
             <div class="service-col-title">2.4 Loyalty</div>
-            <div class="item-card">Velvet Elite Tiers</div>
             <div class="item-card">Points Engine</div>
-            <div class="item-card">Formula Vault</div>
+            <div class="item-card">Recipe Vault</div>
           </div>
-
           <div class="service-col">
             <div class="service-col-title">2.5 Fulfillment</div>
-            <div class="item-card">Bespoke Mixing</div>
-            <div class="item-card">Stock Sync</div>
-            <div class="item-card">WhatsApp Alerts</div>
+            <div class="item-card">Lab Mixer</div>
+            <div class="item-card">WhatsApp Sync</div>
           </div>
-
         </div>
       </div>
 
-      <!-- 3. OUTPUTS / CLIENTS -->
-      <div class="section-box">
-        <div class="section-title">3. Outputs / Clients</div>
-        <div class="item-card">
-          <strong>Web Application</strong>
-          <span>GitHub Pages SPA (#FAF7F2 / #3D0C13)</span>
-        </div>
-        <div class="item-card">
-          <strong>Customer Touchpoints</strong>
-          <span>WhatsApp Alerts, Recipe PDFs, Receipts</span>
-        </div>
-        <div class="item-card">
-          <strong>Admin Dashboard</strong>
-          <span>Order Management & Formula Mix Sheets</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- 4. DATA & PLATFORM LAYER -->
-    <div class="section-box">
-      <div class="section-title">4. Data & Platform Layer (Supabase BaaS Platform)</div>
-      <div class="grid-5-col">
-        <div class="item-card">
-          <strong>PostgreSQL Database</strong>
-          <span>Relational DB with RLS & JSONB custom formulas</span>
-        </div>
-        <div class="item-card">
-          <strong>Auth Services</strong>
-          <span>JWT Auth, Email/Pass & Role-Based RBAC</span>
-        </div>
-        <div class="item-card">
-          <strong>Storage Buckets</strong>
-          <span>S3 Storage for bottle previews & PDFs</span>
-        </div>
-        <div class="item-card">
-          <strong>RealTime Engine</strong>
-          <span>WebSocket sync for order & stock status</span>
-        </div>
-        <div class="item-card">
-          <strong>Auto REST API</strong>
-          <span>PostgREST protected via client keys & RLS</span>
+      <!-- 3. OUTPUTS -->
+      <div class="item-card" style="background-color: var(--cream-canvas);">
+        <strong style="color: var(--velour-burgundy); text-transform: uppercase;">3. Outputs / Clients</strong>
+        <div style="margin-top: 6px;">
+          <div class="item-card"><strong>Web App (SPA)</strong><span>GitHub Pages Hosting</span></div>
+          <div class="item-card"><strong>Touchpoints</strong><span>WhatsApp, Recipe PDFs</span></div>
+          <div class="item-card"><strong>Admin Dashboard</strong><span>Lab Mix Sheets & Stock</span></div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- 5. INFRASTRUCTURE & INTEGRATIONS LAYER -->
-    <div class="section-box">
-      <div class="section-title">5. Infrastructure & Integrations Layer</div>
-      <div class="grid-4-col">
-        <div class="item-card">
-          <strong>GitHub Pages Edge Hosting</strong>
-          <span>Global Static Edge CDN for HTML5/CSS3/Vanilla JS</span>
-        </div>
-        <div class="item-card">
-          <strong>Cloudflare DNS & Security</strong>
-          <span>TLS 1.3 SSL, Edge Caching & DDoS Shielding</span>
-        </div>
-        <div class="item-card">
-          <strong>Supabase Managed Cloud</strong>
-          <span>High-Availability PostgreSQL cluster</span>
-        </div>
-        <div class="item-card">
-          <strong>PayFast Gateway</strong>
-          <span>Credit Cards, Instant EFT & Zapper payments</span>
-        </div>
+  <!-- 4. SYSTEM CONTEXT DIAGRAM (C4 LEVEL 1) -->
+  <div class="section-box">
+    <div class="section-title">4. System Context Diagram (C4 Level 1)</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+      graph TD
+        Customer([Customer / VIP Guest])
+        Admin([Laboratory Admin / Staff])
+        
+        System[Velour Essence Platform<br/>Custom Perfumery & Storefront]
+        
+        PayFast[PayFast Payment Gateway]
+        WhatsApp[WhatsApp Business API]
+        GA4[Google Analytics 4]
+
+        Customer -->|Browses, creates formula, orders| System
+        Admin -->|Manages orders, mixes formulas, updates stock| System
+        
+        System -->|Redirects payment & receives webhooks| PayFast
+        System -->|Triggers order status updates| WhatsApp
+        System -->|Sends conversion & event tracking| GA4
+
+        style System fill:#3D0C13,color:#FAF7F2,stroke:#C5A059,stroke-width:2px
+        style Customer fill:#F4EAD8,color:#2A2018,stroke:#C5A059
+        style Admin fill:#F4EAD8,color:#2A2018,stroke:#C5A059
+        style PayFast fill:#FAF7F2,color:#2A2018,stroke:#7A7168
+        style WhatsApp fill:#FAF7F2,color:#2A2018,stroke:#7A7168
+        style GA4 fill:#FAF7F2,color:#2A2018,stroke:#7A7168
+      </pre>
+    </div>
+    <div class="diagram-explanation">
+      <strong>System Context Diagram Explanation:</strong> This diagram illustrates the high-level boundary of the Velour Essence system. External human actors (Customers and Laboratory Staff) interact directly with the platform. The platform offloads payment processing to PayFast, sends transactional customer notifications via the WhatsApp Business API, and streams analytics data to Google Analytics 4.
+    </div>
+  </div>
+
+  <!-- 5. CONTAINER DIAGRAM (C4 LEVEL 2) -->
+  <div class="section-box">
+    <div class="section-title">5. Container Diagram (C4 Level 2)</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+      graph TD
+        subgraph Client Side
+          SPA[Vanilla JS Web Application<br/>Hosted on GitHub Pages Edge CDN]
+        end
+
+        subgraph Backend-as-a-Service - Supabase
+          Auth[Supabase Auth<br/>JWT & RBAC]
+          API[PostgREST Auto REST API]
+          RealTime[Realtime Engine<br/>WebSocket Server]
+          DB[(PostgreSQL Database<br/>RLS & JSONB Formulas)]
+          Storage[Supabase Storage<br/>S3 Recipe PDFs & Previews]
+        end
+
+        subgraph External Cloud Services
+          PayFast[PayFast Gateway]
+          WA[WhatsApp Business API]
+        end
+
+        SPA -->|HTTPS / REST API| API
+        SPA -->|JWT Registration / Login| Auth
+        SPA -->|WebSockets Live Status| RealTime
+        
+        API -->|Database Queries & Triggers| DB
+        Auth -->|User Profiles Sync| DB
+        RealTime -->|Listen to Table Changes| DB
+        
+        DB -->|Webhook Trigger on Paid Status| WA
+        SPA -->|Redirects Checkout| PayFast
+        PayFast -->|Payment Callback ITN Webhook| API
+
+        style SPA fill:#3D0C13,color:#FAF7F2,stroke:#C5A059
+        style DB fill:#3D0C13,color:#FAF7F2,stroke:#C5A059
+        style Auth fill:#F4EAD8,color:#2A2018,stroke:#C5A059
+        style API fill:#F4EAD8,color:#2A2018,stroke:#C5A059
+        style RealTime fill:#F4EAD8,color:#2A2018,stroke:#C5A059
+        style Storage fill:#F4EAD8,color:#2A2018,stroke:#C5A059
+      </pre>
+    </div>
+    <div class="diagram-explanation">
+      <strong>Container Diagram Explanation:</strong> This diagram breaks down the architecture into executable software containers. The client side consists of a zero-framework Vanilla JS Single Page Application (SPA). The backend is constructed using Supabase services (REST API, Auth, WebSocket Server, S3 Storage, and PostgreSQL Database). PayFast processes payments and sends callback ITNs to update database records.
+    </div>
+  </div>
+
+  <!-- 6. COMPONENT DIAGRAM (C4 LEVEL 3) -->
+  <div class="section-box">
+    <div class="section-title">6. Component Diagram &mdash; Creation Studio & Commerce Engine (C4 Level 3)</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+      graph LR
+        subgraph Web App Frontend Component Architecture
+          UI_Quiz[Quiz Controller]
+          UI_Studio[Studio Note Blender]
+          UI_Cart[Cart State Manager]
+          UI_Auth[Auth Handler]
+          API_Client[Supabase JS Client]
+        end
+
+        subgraph Supabase Database Tables & Security Policies
+          RLS[Row Level Security]
+          T_Prof[(profiles)]
+          T_Form[(custom_formulas)]
+          T_Ord[(orders)]
+          T_Prod[(products)]
+        end
+
+        UI_Quiz -->|Passes Fragrance Family| UI_Studio
+        UI_Studio -->|Persists Note Ratios| UI_Cart
+        UI_Auth -->|Stores Session JWT| API_Client
+        UI_Cart -->|Calls Save & Order APIs| API_Client
+
+        API_Client -->|Protected by| RLS
+        RLS --> T_Prof
+        RLS --> T_Form
+        RLS --> T_Ord
+        RLS --> T_Prod
+
+        style UI_Studio fill:#3D0C13,color:#FAF7F2,stroke:#C5A059
+        style UI_Cart fill:#3D0C13,color:#FAF7F2,stroke:#C5A059
+        style RLS fill:#C5A059,color:#3D0C13,stroke:#3D0C13
+        style T_Form fill:#F4EAD8,color:#2A2018,stroke:#3D0C13
+        style T_Ord fill:#F4EAD8,color:#2A2018,stroke:#3D0C13
+      </pre>
+    </div>
+    <div class="diagram-explanation">
+      <strong>Component Diagram Explanation:</strong> This diagram focuses on the internal structure of the Web Application and how components interact with database entities. The Studio Note Blender passes customized ratios into the Cart Manager. All outgoing REST API calls execute via the Supabase JS Client, which passes through Row-Level Security (RLS) policies before interacting with underlying PostgreSQL tables (`profiles`, `custom_formulas`, `orders`, `products`).
+    </div>
+  </div>
+
+  <!-- 7. USER FLOW DIAGRAM -->
+  <div class="section-box">
+    <div class="section-title">7. Interactive Customer User Flow</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+      flowchart TD
+        A[Land on Velour Essence App] --> B{Choose Entry Pathway}
+        B -->|Pathway 1| C[Take Olfactory Profiling Quiz]
+        B -->|Pathway 2| D[Enter Creation Studio directly]
+        
+        C -->|Get Scent Persona| D
+        
+        D --> E[Blend Top, Heart & Base Notes]
+        E --> F[Add Bottle Engraving & Select Size]
+        F --> G[Save Formula to Recipe Vault]
+        
+        G --> H{Authenticated?}
+        H -->|No| I[Login / Register via Supabase Auth]
+        H -->|Yes| J[Add Custom Blend to Cart]
+        I --> J
+        
+        J --> K[Proceed to Checkout]
+        K --> L[Redirected to PayFast Gateway]
+        L --> M{Payment Successful?}
+        
+        M -->|No| N[Display Payment Failure & Retry]
+        M -->|Yes| O[Order Created & Status set to 'Blending']
+        
+        O --> P[Receive WhatsApp Order Confirmation]
+        O --> Q[Track Live Status on Dashboard]
+        O --> R[Earn Loyalty Points & Level Up Tier]
+
+        style A fill:#3D0C13,color:#FAF7F2,stroke:#C5A059
+        style D fill:#3D0C13,color:#FAF7F2,stroke:#C5A059
+        style O fill:#3D0C13,color:#FAF7F2,stroke:#C5A059
+        style L fill:#F4EAD8,color:#2A2018,stroke:#C5A059
+      </pre>
+    </div>
+    <div class="diagram-explanation">
+      <strong>User Flow Explanation:</strong> Details the complete journey of a visitor from arrival to order confirmation. Users choose between taking an interactive quiz or entering the studio directly. The flow ensures user authentication prior to saving custom formulas and executing payment, ending with automated WhatsApp notifications, live dashboard tracking, and loyalty point rewards.
+    </div>
+  </div>
+
+  <!-- 8. END-TO-END SYSTEM FLOW (SEQUENCE DIAGRAM) -->
+  <div class="section-box">
+    <div class="section-title">8. End-to-End System Sequence Diagram</div>
+    <div class="mermaid-wrapper">
+      <pre class="mermaid">
+      sequenceDiagram
+        autonumber
+        actor Customer as Customer (Browser)
+        participant WebApp as Vanilla JS SPA (GitHub Pages)
+        participant Supabase as Supabase BaaS (Auth/API/DB)
+        participant PayFast as PayFast Gateway
+        actor LabAdmin as Laboratory Staff
+        participant WhatsApp as WhatsApp API
+
+        Customer->>WebApp: 1. Customizes fragrance in Studio
+        WebApp->>Supabase: 2. Save formula (JSONB) via REST API
+        Supabase-->>WebApp: 3. Return Formula ID
+        Customer->>WebApp: 4. Initiates Checkout
+        WebApp->>Supabase: 5. Create Order (Status = 'Pending')
+        WebApp->>PayFast: 6. Redirect Customer to PayFast
+        Customer->>PayFast: 7. Authorize Payment
+        PayFast-->>Supabase: 8. ITN Payment Callback Webhook
+        Supabase->>Supabase: 9. Update status to 'Blending' & calculate Points
+        Supabase-->>LabAdmin: 10. Realtime push new order to Mix Sheet
+        Supabase->>WhatsApp: 11. Trigger Order Confirmation Alert
+        WhatsApp-->>Customer: 12. Receive WhatsApp Notification
+        LabAdmin->>Supabase: 13. Update Status to 'Dispatched'
+        Supabase-->>WebApp: 14. Realtime WebSocket updates Customer UI
+      </pre>
+    </div>
+    <div class="diagram-explanation">
+      <strong>End-to-End System Flow Explanation:</strong> Traces the execution order across all technical actors. It demonstrates how a single transaction spans client interactions, database updates, PayFast webhook callbacks, lab dashboard real-time notifications, and automated WhatsApp updates.
+    </div>
+  </div>
+
+  <!-- 9. ENTERPRISE USER STORIES -->
+  <div class="section-box">
+    <div class="section-title">9. Enterprise User Stories Requirements</div>
+    <table class="stories-table">
+      <thead>
+        <tr>
+          <th style="width: 8%;">ID</th>
+          <th style="width: 12%;">User Role</th>
+          <th style="width: 40%;">User Story Requirement</th>
+          <th style="width: 40%;">Business Value / Acceptance Criteria</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="us-badge">US-01</span></td>
+          <td><strong>Guest</strong></td>
+          <td>Take an interactive olfactory profiling quiz</td>
+          <td>Matches personal scent preferences to recommended fragrance families (Woody, Floral, Citrus, Oriental).</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-02</span></td>
+          <td><strong>Customer</strong></td>
+          <td>Mix top, heart, and base notes in a custom creation studio</td>
+          <td>Calculates formula ratios, displays real-time price updates, and renders bespoke bottle previews.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-03</span></td>
+          <td><strong>Customer</strong></td>
+          <td>Create an account using email and password via Supabase Auth</td>
+          <td>Securely registers profile in Supabase PostgreSQL and issues JWT session tokens for persistent login.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-04</span></td>
+          <td><strong>Customer</strong></td>
+          <td>Log in securely to view personal dashboard</td>
+          <td>Grants access to order history, saved perfume formulas, and current loyalty point balance.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-05</span></td>
+          <td><strong>Customer</strong></td>
+          <td>Add standard products and custom fragrance blends to shopping cart</td>
+          <td>Persists cart state in browser local storage and syncs items smoothly into checkout.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-06</span></td>
+          <td><strong>Customer</strong></td>
+          <td>Complete checkout using PayFast payment gateway</td>
+          <td>Supports Credit Card, Instant EFT, and Zapper payments with automated ITN payment callback verification.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-07</span></td>
+          <td><strong>Customer</strong></td>
+          <td>Track custom perfume blending status in real time</td>
+          <td>Displays live status updates ("Pending" &gt; "Blending" &gt; "Dispatched") via Supabase Realtime subscriptions.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-08</span></td>
+          <td><strong>Customer</strong></td>
+          <td>Receive transactional status notifications via WhatsApp</td>
+          <td>Automated WhatsApp Business API triggers message alerts upon dispatch and delivery.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-09</span></td>
+          <td><strong>Member</strong></td>
+          <td>Earn loyalty points on every completed transaction</td>
+          <td>Automatically updates loyalty tier (Bronze, Silver, Gold, Velvet Elite) based on cumulative spend.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-10</span></td>
+          <td><strong>Member</strong></td>
+          <td>Save custom fragrance formulas under personalized names</td>
+          <td>Stores note compositions in PostgreSQL JSONB column for seamless one-click re-ordering.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-11</span></td>
+          <td><strong>Admin</strong></td>
+          <td>Access real-time order fulfillment management dashboard</td>
+          <td>Allows laboratory staff to view pending custom formula mix sheets and update dispatch status.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-12</span></td>
+          <td><strong>Admin</strong></td>
+          <td>Manage product catalog, fragrance notes stock, and prices</td>
+          <td>Updates PostgreSQL products and notes tables instantly through admin RLS privileges.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-13</span></td>
+          <td><strong>Marketer</strong></td>
+          <td>Track visitor conversion funnels via Google Analytics 4</td>
+          <td>Captures custom events for quiz completions, studio creations, cart additions, and sales conversions.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-14</span></td>
+          <td><strong>Customer</strong></td>
+          <td>Save preferred delivery addresses in profile settings</td>
+          <td>Stores structured JSON address data to accelerate future checkout sessions.</td>
+        </tr>
+        <tr>
+          <td><span class="us-badge">US-15</span></td>
+          <td><strong>Admin</strong></td>
+          <td>Manually adjust customer loyalty points or apply VIP perks</td>
+          <td>Enables customer support representatives to resolve inquiries or issue discretionary rewards.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 10. ARCHITECTURE BENEFITS -->
+  <div class="section-box">
+    <div class="section-title">10. Quality Requirements & Benefits</div>
+    <div class="cross-cutting-grid">
+      <div class="benefit-card">
+        <strong>Security</strong>
+        <span>Supabase RLS & POPIA/GDPR Compliant</span>
+      </div>
+      <div class="benefit-card">
+        <strong>Scalability</strong>
+        <span>Edge CDN Delivery & Up to 1k Sessions</span>
+      </div>
+      <div class="benefit-card">
+        <strong>Performance</strong>
+        <span>FCP &lt; 1.2s &amp; Sub-150ms API Latency</span>
+      </div>
+      <div class="benefit-card">
+        <strong>Usability</strong>
+        <span>Responsive 320px–4K, WCAG 2.1 AA</span>
+      </div>
+      <div class="benefit-card">
+        <strong>Observability</strong>
+        <span>GA4 Analytics & Realtime Tracking</span>
       </div>
     </div>
-
-    <!-- 6. ENTERPRISE USER STORIES SECTION -->
-    <div class="section-box user-stories-section">
-      <div class="section-title">6. Enterprise User Stories</div>
-      <table class="stories-table">
-        <thead>
-          <tr>
-            <th style="width: 8%;">ID</th>
-            <th style="width: 12%;">User Role</th>
-            <th style="width: 40%;">User Story Requirement</th>
-            <th style="width: 40%;">Business Value / Acceptance Criteria</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="us-badge">US-01</span></td>
-            <td><span class="role-badge">Guest</span></td>
-            <td>Take an interactive olfactory profiling quiz</td>
-            <td>Matches personal scent preferences to recommended fragrance families (Woody, Floral, Citrus, Oriental).</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-02</span></td>
-            <td><span class="role-badge">Customer</span></td>
-            <td>Mix top, heart, and base notes in a custom creation studio</td>
-            <td>Calculates formula ratios, displays real-time price updates, and renders bespoke bottle previews.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-03</span></td>
-            <td><span class="role-badge">Customer</span></td>
-            <td>Create an account using email and password via Supabase Auth</td>
-            <td>Securely registers profile in Supabase PostgreSQL and issues JWT session tokens for persistent login.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-04</span></td>
-            <td><span class="role-badge">Customer</span></td>
-            <td>Log in securely to view personal dashboard</td>
-            <td>Grants access to order history, saved perfume formulas, and current loyalty point balance.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-05</span></td>
-            <td><span class="role-badge">Customer</span></td>
-            <td>Add standard products and custom fragrance blends to shopping cart</td>
-            <td>Persists cart state in browser local storage and syncs items smoothly into checkout.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-06</span></td>
-            <td><span class="role-badge">Customer</span></td>
-            <td>Complete checkout using PayFast payment gateway</td>
-            <td>Supports Credit Card, Instant EFT, and Zapper payments with automated ITN payment callback verification.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-07</span></td>
-            <td><span class="role-badge">Customer</span></td>
-            <td>Track custom perfume blending status in real time</td>
-            <td>Displays live status updates ("Pending" &gt; "Blending" &gt; "Dispatched") via Supabase Realtime subscriptions.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-08</span></td>
-            <td><span class="role-badge">Customer</span></td>
-            <td>Receive transactional status notifications via WhatsApp</td>
-            <td>Automated WhatsApp Business API triggers message alerts upon dispatch and delivery.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-09</span></td>
-            <td><span class="role-badge">Member</span></td>
-            <td>Earn loyalty points on every completed transaction</td>
-            <td>Automatically updates loyalty tier (Bronze, Silver, Gold, Velvet Elite) based on cumulative spend.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-10</span></td>
-            <td><span class="role-badge">Member</span></td>
-            <td>Save custom fragrance formulas under personalized names</td>
-            <td>Stores note compositions in PostgreSQL JSONB column for seamless one-click re-ordering.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-11</span></td>
-            <td><span class="role-badge">Admin</span></td>
-            <td>Access real-time order fulfillment management dashboard</td>
-            <td>Allows laboratory staff to view pending custom formula mix sheets and update dispatch status.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-12</span></td>
-            <td><span class="role-badge">Admin</span></td>
-            <td>Manage product catalog, fragrance notes stock, and prices</td>
-            <td>Updates PostgreSQL products and notes tables instantly through admin RLS privileges.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-13</span></td>
-            <td><span class="role-badge">Marketer</span></td>
-            <td>Track visitor conversion funnels via Google Analytics 4</td>
-            <td>Captures custom events for quiz completions, studio creations, cart additions, and sales conversions.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-14</span></td>
-            <td><span class="role-badge">Customer</span></td>
-            <td>Save preferred delivery addresses in profile settings</td>
-            <td>Stores structured JSON address data to accelerate future checkout sessions.</td>
-          </tr>
-          <tr>
-            <td><span class="us-badge">US-15</span></td>
-            <td><span class="role-badge">Admin</span></td>
-            <td>Manually adjust customer loyalty points or apply VIP perks</td>
-            <td>Enables customer support representatives to resolve inquiries or issue discretionary rewards.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 7. QUALITY REQUIREMENTS & BENEFITS -->
-    <div class="section-box">
-      <div class="section-title">7. Architecture Quality Requirements & Benefits</div>
-      <div class="cross-cutting-grid">
-        <div class="benefit-card">
-          <strong>Security</strong>
-          <span>Supabase RLS & POPIA/GDPR Compliant</span>
-        </div>
-        <div class="benefit-card">
-          <strong>Scalability</strong>
-          <span>Edge CDN Delivery & Up to 1k Sessions</span>
-        </div>
-        <div class="benefit-card">
-          <strong>Performance</strong>
-          <span>FCP &lt; 1.2s &amp; Sub-150ms API Latency</span>
-        </div>
-        <div class="benefit-card">
-          <strong>Usability</strong>
-          <span>Responsive 320px–4K, WCAG 2.1 AA</span>
-        </div>
-        <div class="benefit-card">
-          <strong>Observability</strong>
-          <span>GA4 Analytics & Realtime Order Tracking</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <footer>
