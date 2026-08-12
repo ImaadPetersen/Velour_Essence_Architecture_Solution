@@ -11,9 +11,9 @@
     startOnLoad: true,
     theme: 'base',
     flowchart: { useMaxWidth: false, htmlLabels: true, curve: 'basis' },
-    sequence: { useMaxWidth: false, showSequenceNumbers: true },
+    sequence: { useMaxWidth: false, showSequenceNumbers: true, actorMargin: 50, boxMargin: 20 },
     themeVariables: {
-      fontSize: '16px',
+      fontSize: '18px',
       fontFamily: 'system-ui, -apple-system, sans-serif',
       primaryColor: '#F4EAD8',
       primaryTextColor: '#2A2018',
@@ -36,9 +36,8 @@
     --cream-canvas: #FAF7F2;
     --rich-silk: #F4EAD8;
     --deep-ink: #2A2018;
-    --muted-gray: #554D46;
+    --muted-gray: #4A423A;
     --card-border: #D4C3A3;
-    --highlight-gold: #E5C378;
   }
 
   * {
@@ -59,7 +58,7 @@
   }
 
   .diagram-container {
-    max-width: 1500px;
+    max-width: 1600px;
     width: 100%;
     border: 3px solid var(--signature-gold);
     background-color: var(--cream-canvas);
@@ -76,7 +75,6 @@
     background-color: var(--rich-silk);
     padding-top: 28px;
     border-radius: 6px;
-    box-shadow: inset 0 0 10px rgba(197, 160, 89, 0.15);
   }
 
   header h1 {
@@ -101,21 +99,21 @@
     color: var(--muted-gray);
     font-style: italic;
     margin-top: 6px;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   /* Main Section Cards */
   .section-box {
     border: 2px solid var(--card-border);
     background-color: var(--rich-silk);
-    padding: 24px;
+    padding: 28px;
     border-radius: 6px;
-    margin-bottom: 32px;
+    margin-bottom: 36px;
   }
 
   .section-title {
     color: var(--velour-burgundy);
-    font-size: 14pt;
+    font-size: 15pt;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -124,112 +122,115 @@
     margin-bottom: 20px;
   }
 
-  /* Mermaid Diagram Box Fixes for Visibility */
+  /* HARDENED MERMAID DIAGRAM BOX FOR MAXIMUM VISIBILITY */
   .mermaid-wrapper {
     background-color: #FFFFFF;
-    border: 2px solid var(--signature-gold);
-    padding: 24px;
-    border-radius: 6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 16px;
-    overflow-x: auto;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 2.5px solid var(--signature-gold);
+    padding: 30px;
+    border-radius: 8px;
+    display: block;
+    width: 100%;
+    overflow-x: auto; /* Scroll horizontally if screen is small, NEVER shrink */
+    margin-bottom: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
   }
 
   .mermaid {
-    width: 100%;
     display: flex;
     justify-content: center;
+    min-width: 1100px; /* Forces large diagram width */
   }
 
-  /* Force SVG elements in Mermaid to be large and legible */
+  /* FORCE SVG scaling rules via CSS */
   .mermaid svg {
-    min-width: 900px !important;
-    min-height: 450px !important;
-    max-width: 100% !important;
+    min-width: 1100px !important;
+    min-height: 550px !important;
+    width: 100% !important;
     height: auto !important;
+    font-size: 18px !important;
   }
 
   .diagram-explanation {
-    font-size: 10.5pt;
+    font-size: 11pt;
     color: var(--deep-ink);
     background-color: var(--cream-canvas);
-    border-left: 5px solid var(--signature-gold);
+    border-left: 6px solid var(--signature-gold);
     border-top: 1px solid var(--card-border);
     border-right: 1px solid var(--card-border);
     border-bottom: 1px solid var(--card-border);
-    padding: 16px 20px;
-    margin-top: 12px;
-    border-radius: 0 4px 4px 0;
+    padding: 18px 24px;
+    margin-top: 16px;
+    border-radius: 0 6px 6px 0;
   }
 
   .diagram-explanation h5 {
     color: var(--velour-burgundy);
-    font-size: 11pt;
+    font-size: 12pt;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     letter-spacing: 0.5px;
+    font-weight: 800;
   }
 
   /* Layout Grids */
   .grid-2-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 24px;
   }
 
   .grid-3-col {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 20px;
   }
 
-  /* High Impact Feature Cards */
+  /* Feature Cards */
   .feature-card {
     background-color: var(--cream-canvas);
-    border: 1.5px solid var(--card-border);
-    padding: 16px;
-    border-radius: 5px;
+    border: 2px solid var(--card-border);
+    padding: 20px;
+    border-radius: 6px;
   }
 
   .feature-card h4 {
     color: var(--velour-burgundy);
-    font-size: 11.5pt;
-    margin-bottom: 8px;
-    border-bottom: 1.5px solid var(--signature-gold);
+    font-size: 12pt;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--signature-gold);
     padding-bottom: 6px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-weight: 800;
   }
 
   .feature-card ul {
     list-style-type: none;
     padding-left: 0;
-    font-size: 10pt;
+    font-size: 10.5pt;
   }
 
   .feature-card li {
-    margin-bottom: 8px;
-    padding-left: 18px;
+    margin-bottom: 10px;
+    padding-left: 20px;
     position: relative;
+    font-weight: 500;
   }
 
   .feature-card li::before {
     content: "■";
     color: var(--signature-gold);
-    font-size: 8pt;
+    font-size: 9pt;
     position: absolute;
     left: 0;
     top: 2px;
   }
 
-  /* Model Architecture Columns */
+  /* Architecture Diagram Structure */
   .top-row-grid {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    gap: 16px;
+    gap: 18px;
   }
 
   .services-subgrid {
@@ -240,18 +241,18 @@
 
   .service-col {
     background-color: var(--cream-canvas);
-    border: 1px solid var(--card-border);
-    padding: 10px;
+    border: 1.5px solid var(--card-border);
+    padding: 12px;
     border-radius: 4px;
   }
 
   .service-col-title {
     color: var(--velour-burgundy);
-    font-size: 9.5pt;
+    font-size: 10pt;
     font-weight: 800;
     text-transform: uppercase;
     border-bottom: 1.5px solid var(--signature-gold);
-    padding-bottom: 4px;
+    padding-bottom: 6px;
     margin-bottom: 10px;
     text-align: center;
   }
@@ -259,29 +260,29 @@
   .item-card {
     background-color: var(--rich-silk);
     border: 1px solid var(--card-border);
-    padding: 8px 10px;
+    padding: 10px 12px;
     margin-bottom: 8px;
-    font-size: 9.5pt;
+    font-size: 10pt;
     border-radius: 4px;
   }
 
   .item-card strong {
     color: var(--velour-burgundy);
     display: block;
-    font-size: 10pt;
+    font-size: 10.5pt;
   }
 
   .item-card span {
     color: var(--muted-gray);
-    font-size: 8.5pt;
-    font-weight: 500;
+    font-size: 9pt;
+    font-weight: 600;
   }
 
   /* User Stories Table */
   .stories-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 9.5pt;
+    font-size: 10pt;
     background-color: var(--cream-canvas);
   }
 
@@ -289,15 +290,15 @@
     background-color: var(--velour-burgundy);
     color: #FFFFFF;
     text-align: left;
-    padding: 12px;
+    padding: 14px;
     border: 1px solid var(--velour-burgundy);
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
   .stories-table td {
-    padding: 10px 12px;
+    padding: 12px 14px;
     border: 1px solid var(--card-border);
     vertical-align: top;
   }
@@ -310,51 +311,51 @@
     background-color: var(--signature-gold);
     color: var(--velour-burgundy);
     font-weight: 800;
-    padding: 3px 8px;
+    padding: 4px 8px;
     border-radius: 3px;
-    font-size: 8.5pt;
+    font-size: 9pt;
   }
 
   /* Quality Ribbons */
   .cross-cutting-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    gap: 12px;
   }
 
   .benefit-card {
     background-color: var(--rich-silk);
-    border: 1.5px solid var(--signature-gold);
+    border: 2px solid var(--signature-gold);
     text-align: center;
-    padding: 12px;
+    padding: 14px;
     border-radius: 4px;
   }
 
   .benefit-card strong {
     color: var(--velour-burgundy);
-    font-size: 10pt;
+    font-size: 10.5pt;
     display: block;
     text-transform: uppercase;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   .benefit-card span {
     color: var(--deep-ink);
-    font-size: 8.5pt;
+    font-size: 9pt;
     font-weight: 600;
   }
 
   footer {
     text-align: center;
-    font-size: 9.5pt;
+    font-size: 10pt;
     color: var(--muted-gray);
-    margin-top: 24px;
+    margin-top: 28px;
     border-top: 2px solid var(--card-border);
-    padding-top: 16px;
-    font-weight: 600;
+    padding-top: 18px;
+    font-weight: 700;
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1200px) {
     .top-row-grid, .services-subgrid, .grid-3-col, .grid-2-col, .cross-cutting-grid {
       grid-template-columns: 1fr;
     }
@@ -368,8 +369,8 @@
   <!-- HEADER -->
   <header>
     <h1>Velour Essence</h1>
-    <h2>SOLUTION ARCHITECTURE & SYSTEM SPECIFICATIONS</h2>
-    <p>High-Visibility Technical Diagrams, End-to-End User Flows & Platform Capabilities</p>
+    <h2>HIGH-VISIBILITY SYSTEM ARCHITECTURE & TECHNICAL BLUEPRINT</h2>
+    <p>Custom Perfumery Platform &mdash; Model Architecture, Large-Scale C4 Diagrams & Sequence Flows</p>
   </header>
 
   <!-- 1. DOMAIN & PLATFORM SPECIFICATIONS -->
@@ -385,7 +386,7 @@
         <p><strong>Serverless Single-Page Web Application (SPA):</strong> High-speed Vanilla JS web client hosted on global Edge CDNs, interacting via REST APIs and WebSockets with Supabase cloud infrastructure.</p>
       </div>
       <div class="feature-card">
-        <h4>Primary Platform Stakeholders</h4>
+        <h4>Primary Stakeholders</h4>
         <p><strong>VIP Customers & Laboratory Operations:</strong> Serves retail perfume enthusiasts creating signature blends alongside laboratory technicians managing order queues and bespoke formulas.</p>
       </div>
     </div>
@@ -428,9 +429,9 @@
       <div class="item-card" style="background-color: var(--cream-canvas);">
         <strong style="color: var(--velour-burgundy); text-transform: uppercase;">1. Inputs & Sources</strong>
         <div style="margin-top: 8px;">
-          <div class="item-card"><strong>Social Campaigns</strong><span>Instagram & TikTok Meta Funnels</span></div>
+          <div class="item-card"><strong>Social Campaigns</strong><span>Instagram & TikTok Funnels</span></div>
           <div class="item-card"><strong>Direct Web Clients</strong><span>Desktop & Mobile Browsers</span></div>
-          <div class="item-card"><strong>VIP Referrals</strong><span>QR Code Invitations & Private Links</span></div>
+          <div class="item-card"><strong>VIP Referrals</strong><span>QR Campaigns & Private Links</span></div>
         </div>
       </div>
 
@@ -460,7 +461,7 @@
           <div class="service-col">
             <div class="service-col-title">2.5 Laboratory</div>
             <div class="item-card">Mix Sheet Queue</div>
-            <div class="item-card">WhatsApp Alerts</div>
+            <div class="item-card">WhatsApp Sync</div>
           </div>
         </div>
       </div>
@@ -468,7 +469,7 @@
       <div class="item-card" style="background-color: var(--cream-canvas);">
         <strong style="color: var(--velour-burgundy); text-transform: uppercase;">3. Outputs & Clients</strong>
         <div style="margin-top: 8px;">
-          <div class="item-card"><strong>Web Application</strong><span>GitHub Pages Edge CDN SPA</span></div>
+          <div class="item-card"><strong>Web Application</strong><span>GitHub Pages Edge CDN</span></div>
           <div class="item-card"><strong>Touchpoints</strong><span>WhatsApp Alerts & Receipts</span></div>
           <div class="item-card"><strong>Lab Dashboard</strong><span>Mix Sheets & Stock Sync</span></div>
         </div>
@@ -480,35 +481,35 @@
   <div class="section-box">
     <div class="section-title">4. System Context Diagram (C4 Level 1)</div>
     <div class="mermaid-wrapper">
-      <pre class="mermaid">
+      <div class="mermaid">
       graph TD
         Customer([Customer / VIP Client])
         Admin([Laboratory Technician / Admin])
         
-        System[Velour Essence Platform<br/>Core E-Commerce & Custom Scent Studio]
+        System[Velour Essence Core Platform<br/>Custom Parfumerie & Storefront]
         
         PayFast[PayFast Payment Gateway]
         WhatsApp[WhatsApp Business API]
         GA4[Google Analytics 4]
 
-        Customer -->|Browses catalog, blends perfume, places order| System
+        Customer -->|Browses catalog, blends fragrance, submits order| System
         Admin -->|Views mix sheets, updates order status & stock| System
         
         System -->|Redirects checkout & receives ITN callbacks| PayFast
-        System -->|Triggers dispatch updates| WhatsApp
-        System -->|Streams custom funnel events| GA4
+        System -->|Triggers order dispatch notifications| WhatsApp
+        System -->|Streams real-time event analytics| GA4
 
-        style System fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
-        style Customer fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:2px
-        style Admin fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:2px
+        style System fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:4px
+        style Customer fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:3px
+        style Admin fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:3px
         style PayFast fill:#FFFFFF,color:#2A2018,stroke:#7A7168,stroke-width:2px
         style WhatsApp fill:#FFFFFF,color:#2A2018,stroke:#7A7168,stroke-width:2px
         style GA4 fill:#FFFFFF,color:#2A2018,stroke:#7A7168,stroke-width:2px
-      </pre>
+      </div>
     </div>
     <div class="diagram-explanation">
       <h5>Context Diagram Breakdown:</h5>
-      <p>This diagram establishes the high-level boundaries of the system. <strong>Customers</strong> and <strong>Laboratory Admins</strong> are the primary human actors interacting directly with the system core. External systems include <strong>PayFast</strong> for payment processing, <strong>WhatsApp API</strong> for automated messaging, and <strong>GA4</strong> for analytics tracking.</p>
+      <p>This diagram establishes the high-level system boundary. <strong>Customers</strong> and <strong>Laboratory Technicians</strong> interact directly with the Velour Essence Platform. The system offloads payment processing to <strong>PayFast</strong>, dispatches notifications through the <strong>WhatsApp API</strong>, and sends conversion tracking to <strong>Google Analytics 4</strong>.</p>
     </div>
   </div>
 
@@ -516,62 +517,62 @@
   <div class="section-box">
     <div class="section-title">5. Container Diagram (C4 Level 2)</div>
     <div class="mermaid-wrapper">
-      <pre class="mermaid">
+      <div class="mermaid">
       graph TD
         subgraph Client Frontend Layer
-          SPA[Vanilla JS Single Page App<br/>Hosted on GitHub Pages Edge CDN]
+          SPA[Vanilla JS Single Page Application<br/>Hosted on GitHub Pages Edge CDN]
         end
 
-        subgraph Cloud Backend Services - Supabase
+        subgraph Cloud Backend Services - Supabase BaaS
           Auth[Supabase Auth<br/>JWT & Role-Based Access]
           API[PostgREST Auto API<br/>REST Interfaces]
-          RealTime[Realtime Server<br/>WebSockets Sync]
-          DB[(PostgreSQL Database<br/>RLS & Formula Storage)]
+          RealTime[Realtime Server<br/>WebSocket State Sync]
+          DB[(PostgreSQL Database<br/>RLS Security & Formula Tables)]
         end
 
-        subgraph External Integration Services
+        subgraph External Cloud Services
           PayFast[PayFast Payment Gateway]
           WA[WhatsApp Business API]
         end
 
         SPA -->|HTTPS / JSON REST API| API
-        SPA -->|User Authentication| Auth
+        SPA -->|User Session Login| Auth
         SPA -->|Live Order Updates| RealTime
         
         API -->|Database Queries & Triggers| DB
-        Auth -->|Sync Profile Data| DB
-        RealTime -->|Table Change Listeners| DB
+        Auth -->|Sync User Profile Data| DB
+        RealTime -->|Table Listener Notifications| DB
         
         DB -->|Webhook Trigger on Order Paid| WA
         SPA -->|Redirects Payment Session| PayFast
         PayFast -->|Payment Callback ITN Webhook| API
 
-        style SPA fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
-        style DB fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
+        style SPA fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:4px
+        style DB fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:4px
         style Auth fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:2px
         style API fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:2px
         style RealTime fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:2px
         style PayFast fill:#FFFFFF,color:#2A2018,stroke:#7A7168
         style WA fill:#FFFFFF,color:#2A2018,stroke:#7A7168
-      </pre>
+      </div>
     </div>
     <div class="diagram-explanation">
       <h5>Container Architecture Breakdown:</h5>
-      <p>The client side consists of a zero-framework <strong>Vanilla JS SPA</strong> served via <strong>GitHub Pages</strong>. The backend utilizes <strong>Supabase Cloud Services</strong>: <em>PostgREST</em> for RESTful routing, <em>Supabase Auth</em> for session management, <em>Realtime Server</em> for WebSocket state updates, and a <em>PostgreSQL Relational Database</em> utilizing Row-Level Security (RLS) policies.</p>
+      <p>The system breaks down into modular runtime containers. The client application is a <strong>Vanilla JS SPA</strong> hosted on <strong>GitHub Pages</strong>. The backend relies on <strong>Supabase</strong> (REST API, Auth, WebSocket Server, and PostgreSQL Database). Payments are handed off to <strong>PayFast</strong>, which reports status changes back via Webhook ITNs.</p>
     </div>
   </div>
 
   <!-- 6. COMPONENT DIAGRAM (C4 LEVEL 3) -->
   <div class="section-box">
-    <div class="section-title">6. Component Diagram &mdash; Creation Studio & Commerce Engine (C4 Level 3)</div>
+    <div class="section-title">6. Component Diagram &mdash; Studio & Commerce Engine (C4 Level 3)</div>
     <div class="mermaid-wrapper">
-      <pre class="mermaid">
+      <div class="mermaid">
       graph LR
         subgraph Web Application Frontend Components
           UI_Quiz[Quiz Controller]
           UI_Studio[Studio Note Blender]
           UI_Cart[Cart State Manager]
-          UI_Auth[Auth Manager]
+          UI_Auth[Auth Handler]
           API_Client[Supabase JS Client]
         end
 
@@ -583,27 +584,27 @@
           T_Prod[(products Table)]
         end
 
-        UI_Quiz -->|Passes Recommended Notes| UI_Studio
-        UI_Studio -->|Sends Custom Formula Data| UI_Cart
-        UI_Auth -->|Attaches JWT Token| API_Client
-        UI_Cart -->|Submits Checkout Data| API_Client
+        UI_Quiz -->|Passes Recommended Scent Profile| UI_Studio
+        UI_Studio -->|Sends Custom Formula Ratios| UI_Cart
+        UI_Auth -->|Attaches Session JWT Token| API_Client
+        UI_Cart -->|Submits Checkout Details| API_Client
 
-        API_Client -->|Validates Requests via| RLS
+        API_Client -->|Validates Authorization via| RLS
         RLS --> T_Prof
         RLS --> T_Form
         RLS --> T_Ord
         RLS --> T_Prod
 
-        style UI_Studio fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:2px
-        style UI_Cart fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:2px
-        style RLS fill:#C5A059,color:#3D0C13,stroke:#3D0C13,stroke-width:2px
+        style UI_Studio fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
+        style UI_Cart fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
+        style RLS fill:#C5A059,color:#3D0C13,stroke:#3D0C13,stroke-width:3px
         style T_Form fill:#F4EAD8,color:#3D0C13,stroke:#3D0C13
         style T_Ord fill:#F4EAD8,color:#3D0C13,stroke:#3D0C13
-      </pre>
+      </div>
     </div>
     <div class="diagram-explanation">
       <h5>Component Breakdown:</h5>
-      <p>Details internal client components and data routing. The <strong>Studio Note Blender</strong> captures note percentages, passing structured JSON payload into the <strong>Cart State Manager</strong>. Outgoing REST requests pass through the <strong>Supabase JS Client</strong>, enforcing security using <strong>Row-Level Security (RLS)</strong> before accessing PostgreSQL tables.</p>
+      <p>Shows internal code components and their relationship to data tables. The <strong>Studio Note Blender</strong> converts user slider inputs into structured JSON payloads, which are processed by the <strong>Cart State Manager</strong>. All API communications are funneled through the <strong>Supabase JS Client</strong>, enforcing security via <strong>Row-Level Security (RLS)</strong> policies before modifying PostgreSQL data.</p>
     </div>
   </div>
 
@@ -611,45 +612,45 @@
   <div class="section-box">
     <div class="section-title">7. Customer Journey & Interaction Flow</div>
     <div class="mermaid-wrapper">
-      <pre class="mermaid">
+      <div class="mermaid">
       flowchart TD
-        A[Land on Platform] --> B{Select Entry Path}
-        B -->|Option 1| C[Take Olfactory Quiz]
-        B -->|Option 2| D[Directly Enter Creation Studio]
+        A[Land on Velour Essence App] --> B{Select Entry Path}
+        B -->|Option 1| C[Take Olfactory Profiling Quiz]
+        B -->|Option 2| D[Directly Enter Scent Creation Studio]
         
-        C -->|Scent Persona Match| D
+        C -->|Match Scent Persona| D
         
-        D --> E[Blend Top, Heart & Base Ratios]
-        E --> F[Add Engraving Name & Bottle Size]
-        F --> G[Save Blend to Recipe Vault]
+        D --> E[Blend Top, Heart & Base Note Ratios]
+        E --> F[Add Custom Engraving Text & Bottle Size]
+        F --> G[Save Blend to Personal Recipe Vault]
         
         G --> H{User Logged In?}
-        H -->|No| I[Login / Register via Supabase Auth]
-        H -->|Yes| J[Add Custom Perfume to Cart]
+        H -->|No| I[Register / Login via Supabase Auth]
+        H -->|Yes| J[Add Custom Blend to Shopping Cart]
         I --> J
         
-        J --> K[Proceed to Checkout]
+        J --> K[Proceed to VIP Checkout]
         K --> L[Redirect to PayFast Gateway]
-        L --> M{Payment Verified?}
+        L --> M{Payment Approved?}
         
-        M -->|Failed| N[Display Payment Retry Options]
-        M -->|Success| O[Set Order Status to 'Blending']
+        M -->|Failed| N[Display Payment Failure & Retry Options]
+        M -->|Success| O[Update Order Status to 'Blending']
         
-        O --> P[Trigger WhatsApp Confirmation Alert]
+        O --> P[Send WhatsApp Order Confirmation Alert]
         O --> Q[Stream Realtime Updates to Dashboard]
         O --> R[Credit Loyalty Points to User Tier]
 
-        style A fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:2px
-        style D fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:2px
-        style O fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:2px
-        style L fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:2px
-      </pre>
+        style A fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
+        style D fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
+        style O fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
+        style L fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:3px
+      </div>
     </div>
     <div class="diagram-explanation">
       <h5>User Flow Step-by-Step Explanation:</h5>
-      <p><strong>1. Onboarding:</strong> Visitors choose between an interactive scent profiling quiz or direct studio blending.<br/>
-      <strong>2. Customization:</strong> Users adjust top, heart, and base notes, add engraving text, and save formulas.<br/>
-      <strong>3. Checkout & Fulfillment:</strong> After authenticating, customers complete payment on PayFast. Successful transactions update order status to <em>Blending</em>, triggering real-time UI updates, automated WhatsApp alerts, and loyalty rewards.</p>
+      <p><strong>1. Discovery & Profiling:</strong> Visitors begin either with an olfactory quiz or directly inside the creation studio.<br/>
+      <strong>2. Customization:</strong> Customers manipulate note balances, apply bottle engravings, and save their formulation.<br/>
+      <strong>3. Checkout & Fulfillment:</strong> Authentication ensures formulas are saved to the user's account before payment via PayFast. Successful authorization triggers automated laboratory queuing, WhatsApp notification, and loyalty point rewards.</p>
     </div>
   </div>
 
@@ -657,7 +658,7 @@
   <div class="section-box">
     <div class="section-title">8. End-to-End System Sequence Diagram</div>
     <div class="mermaid-wrapper">
-      <pre class="mermaid">
+      <div class="mermaid">
       sequenceDiagram
         autonumber
         actor Customer as Customer (Browser)
@@ -670,18 +671,18 @@
         Customer->>WebApp: 1. Customizes scent formula in Studio
         WebApp->>Supabase: 2. Save formula (JSONB) via REST API
         Supabase-->>WebApp: 3. Return unique Formula ID
-        Customer->>WebApp: 4. Initiates Checkout
+        Customer->>WebApp: 4. Initiates Checkout Process
         WebApp->>Supabase: 5. Create Order Record (Status = 'Pending')
-        WebApp->>PayFast: 6. Redirect Customer to PayFast
+        WebApp->>PayFast: 6. Redirect Customer to PayFast Session
         Customer->>PayFast: 7. Complete Payment Transaction
         PayFast-->>Supabase: 8. ITN Callback Webhook (Payment Verified)
-        Supabase->>Supabase: 9. Set Status = 'Blending' & Add Loyalty Points
+        Supabase->>Supabase: 9. Set Status = 'Blending' & Calculate Points
         Supabase-->>LabAdmin: 10. Push new order to Mix Sheet Queue (WebSockets)
-        Supabase->>WhatsApp: 11. Trigger Order Dispatch Alert
-        WhatsApp-->>Customer: 12. Receive WhatsApp Confirmation
+        Supabase->>WhatsApp: 11. Trigger Order Confirmation Alert
+        WhatsApp-->>Customer: 12. Receive WhatsApp Dispatch Notification
         LabAdmin->>Supabase: 13. Mark Order as 'Dispatched'
         Supabase-->>WebApp: 14. Live WebSocket update on Customer Dashboard
-      </pre>
+      </div>
     </div>
     <div class="diagram-explanation">
       <h5>Sequence Flow Breakdown:</h5>
