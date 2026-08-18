@@ -4,16 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Velour Essence | Master Architecture & Technical Blueprint</title>
+
 <!-- Mermaid.js for Diagrams -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 <script>
   mermaid.initialize({
     startOnLoad: true,
     theme: 'base',
-    flowchart: { useMaxWidth: false, htmlLabels: true, curve: 'basis' },
-    sequence: { useMaxWidth: false, showSequenceNumbers: true, actorMargin: 50, boxMargin: 20 },
+    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
+    sequence: { useMaxWidth: true, showSequenceNumbers: true, actorMargin: 50, boxMargin: 20 },
     themeVariables: {
-      fontSize: '18px',
+      fontSize: '16px',
       fontFamily: 'system-ui, -apple-system, sans-serif',
       primaryColor: '#F4EAD8',
       primaryTextColor: '#2A2018',
@@ -29,6 +30,7 @@
     }
   });
 </script>
+
 <style>
   :root {
     --velour-burgundy: #3D0C13;
@@ -66,7 +68,6 @@
     box-shadow: 0 12px 40px rgba(61, 12, 19, 0.12);
   }
 
-  /* Header Section */
   header {
     text-align: center;
     border-bottom: 3px solid var(--signature-gold);
@@ -102,7 +103,6 @@
     font-weight: 600;
   }
 
-  /* Main Section Cards */
   .section-box {
     border: 2px solid var(--card-border);
     background-color: var(--rich-silk);
@@ -122,32 +122,70 @@
     margin-bottom: 20px;
   }
 
-  /* HARDENED MERMAID DIAGRAM BOX FOR MAXIMUM VISIBILITY */
+  /* FLEXIBLE & ADJUSTABLE MERMAID CONTAINER */
   .mermaid-wrapper {
+    position: relative;
     background-color: #FFFFFF;
     border: 2.5px solid var(--signature-gold);
-    padding: 30px;
+    padding: 20px;
     border-radius: 8px;
-    display: block;
     width: 100%;
-    overflow-x: auto; /* Scroll horizontally if screen is small, NEVER shrink */
+    overflow: hidden;
     margin-bottom: 20px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.06);
   }
 
-  .mermaid {
+  .mermaid-controls {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
     display: flex;
-    justify-content: center;
-    min-width: 1100px; /* Forces large diagram width */
+    gap: 6px;
+    background: rgba(250, 247, 242, 0.9);
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--card-border);
   }
 
-  /* FORCE SVG scaling rules via CSS */
+  .mermaid-controls button {
+    background: var(--velour-burgundy);
+    color: #FFFFFF;
+    border: 1px solid var(--signature-gold);
+    border-radius: 3px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .mermaid-controls button:hover {
+    background: var(--signature-gold);
+    color: var(--velour-burgundy);
+  }
+
+  .mermaid-viewport {
+    width: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 380px;
+  }
+
+  .mermaid {
+    transition: transform 0.2s ease-in-out;
+    transform-origin: center center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* CLEAN RESPONSIVE SVG ADJUSTMENT */
   .mermaid svg {
-    min-width: 1100px !important;
-    min-height: 550px !important;
-    width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
-    font-size: 18px !important;
   }
 
   .diagram-explanation {
@@ -172,7 +210,6 @@
     font-weight: 800;
   }
 
-  /* Layout Grids */
   .grid-2-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -185,7 +222,6 @@
     gap: 20px;
   }
 
-  /* Feature Cards */
   .feature-card {
     background-color: var(--cream-canvas);
     border: 2px solid var(--card-border);
@@ -226,7 +262,6 @@
     top: 2px;
   }
 
-  /* Architecture Diagram Structure */
   .top-row-grid {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
@@ -278,7 +313,6 @@
     font-weight: 600;
   }
 
-  /* User Stories Table */
   .stories-table {
     width: 100%;
     border-collapse: collapse;
@@ -316,7 +350,6 @@
     font-size: 9pt;
   }
 
-  /* Quality Ribbons */
   .cross-cutting-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -481,30 +514,41 @@
   <div class="section-box">
     <div class="section-title">4. System Context Diagram (C4 Level 1)</div>
     <div class="mermaid-wrapper">
-      <div class="mermaid">
-      graph TD
-        Customer([Customer / VIP Client])
-        Admin([Laboratory Technician / Admin])
-        
-        System[Velour Essence Core Platform<br/>Custom Parfumerie & Storefront]
-        
-        PayFast[PayFast Payment Gateway]
-        WhatsApp[WhatsApp Business API]
-        GA4[Google Analytics 4]
+      <div class="mermaid-controls">
+        <button onclick="zoomMermaid(this, 1.2)">+ Zoom</button>
+        <button onclick="zoomMermaid(this, 0.8)">- Zoom</button>
+        <button onclick="resetMermaid(this)">Reset</button>
+      </div>
+      <div class="mermaid-viewport">
+        <div class="mermaid">
+        graph TD
+          subgraph Users["Primary Stakeholders"]
+            Customer(["Customer / VIP Client"])
+            Admin(["Laboratory Technician / Admin"])
+          end
 
-        Customer -->|Browses catalog, blends fragrance, submits order| System
-        Admin -->|Views mix sheets, updates order status & stock| System
-        
-        System -->|Redirects checkout & receives ITN callbacks| PayFast
-        System -->|Triggers order dispatch notifications| WhatsApp
-        System -->|Streams real-time event analytics| GA4
+          System["Velour Essence Core Platform<br/>(Custom Parfumerie & Storefront)"]
 
-        style System fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:4px
-        style Customer fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:3px
-        style Admin fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:3px
-        style PayFast fill:#FFFFFF,color:#2A2018,stroke:#7A7168,stroke-width:2px
-        style WhatsApp fill:#FFFFFF,color:#2A2018,stroke:#7A7168,stroke-width:2px
-        style GA4 fill:#FFFFFF,color:#2A2018,stroke:#7A7168,stroke-width:2px
+          subgraph Integrations["External Services"]
+            PayFast["PayFast Payment Gateway"]
+            WhatsApp["WhatsApp Business API"]
+            GA4["Google Analytics 4"]
+          end
+
+          Customer -->|Browses catalog, blends fragrance, submits order| System
+          Admin -->|Views mix sheets, updates order status & stock| System
+
+          System -->|Redirects checkout & receives ITN callbacks| PayFast
+          System -->|Triggers order dispatch notifications| WhatsApp
+          System -->|Streams real-time event analytics| GA4
+
+          style System fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:4px
+          style Customer fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:3px
+          style Admin fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:3px
+          style PayFast fill:#FFFFFF,color:#2A2018,stroke:#7A7168,stroke-width:2px
+          style WhatsApp fill:#FFFFFF,color:#2A2018,stroke:#7A7168,stroke-width:2px
+          style GA4 fill:#FFFFFF,color:#2A2018,stroke:#7A7168,stroke-width:2px
+        </div>
       </div>
     </div>
     <div class="diagram-explanation">
@@ -517,43 +561,50 @@
   <div class="section-box">
     <div class="section-title">5. Container Diagram (C4 Level 2)</div>
     <div class="mermaid-wrapper">
-      <div class="mermaid">
-      graph TD
-        subgraph Client Frontend Layer
-          SPA[Vanilla JS Single Page Application<br/>Hosted on GitHub Pages Edge CDN]
-        end
+      <div class="mermaid-controls">
+        <button onclick="zoomMermaid(this, 1.2)">+ Zoom</button>
+        <button onclick="zoomMermaid(this, 0.8)">- Zoom</button>
+        <button onclick="resetMermaid(this)">Reset</button>
+      </div>
+      <div class="mermaid-viewport">
+        <div class="mermaid">
+        graph LR
+          subgraph Client["Client Frontend Layer"]
+            SPA["Vanilla JS Single Page App<br/>(GitHub Pages Edge CDN)"]
+          end
 
-        subgraph Cloud Backend Services - Supabase BaaS
-          Auth[Supabase Auth<br/>JWT & Role-Based Access]
-          API[PostgREST Auto API<br/>REST Interfaces]
-          RealTime[Realtime Server<br/>WebSocket State Sync]
-          DB[(PostgreSQL Database<br/>RLS Security & Formula Tables)]
-        end
+          subgraph Backend["Cloud Backend Services - Supabase BaaS"]
+            Auth["Supabase Auth<br/>(JWT & Access)"]
+            API["PostgREST Auto API<br/>(REST Interface)"]
+            RealTime["Realtime Server<br/>(WebSocket Sync)"]
+            DB[("PostgreSQL Database<br/>(RLS & Formula Tables)")]
+          end
 
-        subgraph External Cloud Services
-          PayFast[PayFast Payment Gateway]
-          WA[WhatsApp Business API]
-        end
+          subgraph External["External Cloud Services"]
+            PayFast["PayFast Gateway"]
+            WA["WhatsApp Business API"]
+          end
 
-        SPA -->|HTTPS / JSON REST API| API
-        SPA -->|User Session Login| Auth
-        SPA -->|Live Order Updates| RealTime
-        
-        API -->|Database Queries & Triggers| DB
-        Auth -->|Sync User Profile Data| DB
-        RealTime -->|Table Listener Notifications| DB
-        
-        DB -->|Webhook Trigger on Order Paid| WA
-        SPA -->|Redirects Payment Session| PayFast
-        PayFast -->|Payment Callback ITN Webhook| API
+          SPA -->|HTTPS / JSON REST| API
+          SPA -->|User Session Login| Auth
+          SPA -->|Live Order Updates| RealTime
 
-        style SPA fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:4px
-        style DB fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:4px
-        style Auth fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:2px
-        style API fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:2px
-        style RealTime fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:2px
-        style PayFast fill:#FFFFFF,color:#2A2018,stroke:#7A7168
-        style WA fill:#FFFFFF,color:#2A2018,stroke:#7A7168
+          API -->|Database Queries| DB
+          Auth -->|Sync User Profile Data| DB
+          RealTime -->|Table Listener Alerts| DB
+
+          DB -->|Webhook Trigger on Paid Order| WA
+          SPA -->|Redirect Payment Session| PayFast
+          PayFast -->|Payment Callback ITN Webhook| API
+
+          style SPA fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:4px
+          style DB fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:4px
+          style Auth fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:2px
+          style API fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:2px
+          style RealTime fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:2px
+          style PayFast fill:#FFFFFF,color:#2A2018,stroke:#7A7168
+          style WA fill:#FFFFFF,color:#2A2018,stroke:#7A7168
+        </div>
       </div>
     </div>
     <div class="diagram-explanation">
@@ -566,40 +617,47 @@
   <div class="section-box">
     <div class="section-title">6. Component Diagram &mdash; Studio & Commerce Engine (C4 Level 3)</div>
     <div class="mermaid-wrapper">
-      <div class="mermaid">
-      graph LR
-        subgraph Web Application Frontend Components
-          UI_Quiz[Quiz Controller]
-          UI_Studio[Studio Note Blender]
-          UI_Cart[Cart State Manager]
-          UI_Auth[Auth Handler]
-          API_Client[Supabase JS Client]
-        end
+      <div class="mermaid-controls">
+        <button onclick="zoomMermaid(this, 1.2)">+ Zoom</button>
+        <button onclick="zoomMermaid(this, 0.8)">- Zoom</button>
+        <button onclick="resetMermaid(this)">Reset</button>
+      </div>
+      <div class="mermaid-viewport">
+        <div class="mermaid">
+        graph LR
+          subgraph Frontend["Web Application Frontend Components"]
+            UI_Quiz["Quiz Controller"]
+            UI_Studio["Studio Note Blender"]
+            UI_Cart["Cart State Manager"]
+            UI_Auth["Auth Handler"]
+            API_Client["Supabase JS Client"]
+          end
 
-        subgraph Database & Row Level Security Policies
-          RLS[Row Level Security Engine]
-          T_Prof[(profiles Table)]
-          T_Form[(custom_formulas Table)]
-          T_Ord[(orders Table)]
-          T_Prod[(products Table)]
-        end
+          subgraph Database["Database & Row Level Security"]
+            RLS["Row Level Security Engine"]
+            T_Prof[("profiles Table")]
+            T_Form[("custom_formulas Table")]
+            T_Ord[("orders Table")]
+            T_Prod[("products Table")]
+          end
 
-        UI_Quiz -->|Passes Recommended Scent Profile| UI_Studio
-        UI_Studio -->|Sends Custom Formula Ratios| UI_Cart
-        UI_Auth -->|Attaches Session JWT Token| API_Client
-        UI_Cart -->|Submits Checkout Details| API_Client
+          UI_Quiz -->|Passes Profile| UI_Studio
+          UI_Studio -->|Sends Formula Ratios| UI_Cart
+          UI_Auth -->|Attaches JWT Token| API_Client
+          UI_Cart -->|Submits Checkout Details| API_Client
 
-        API_Client -->|Validates Authorization via| RLS
-        RLS --> T_Prof
-        RLS --> T_Form
-        RLS --> T_Ord
-        RLS --> T_Prod
+          API_Client -->|Validates via| RLS
+          RLS --> T_Prof
+          RLS --> T_Form
+          RLS --> T_Ord
+          RLS --> T_Prod
 
-        style UI_Studio fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
-        style UI_Cart fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
-        style RLS fill:#C5A059,color:#3D0C13,stroke:#3D0C13,stroke-width:3px
-        style T_Form fill:#F4EAD8,color:#3D0C13,stroke:#3D0C13
-        style T_Ord fill:#F4EAD8,color:#3D0C13,stroke:#3D0C13
+          style UI_Studio fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
+          style UI_Cart fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
+          style RLS fill:#C5A059,color:#3D0C13,stroke:#3D0C13,stroke-width:3px
+          style T_Form fill:#F4EAD8,color:#3D0C13,stroke:#3D0C13
+          style T_Ord fill:#F4EAD8,color:#3D0C13,stroke:#3D0C13
+        </div>
       </div>
     </div>
     <div class="diagram-explanation">
@@ -612,38 +670,46 @@
   <div class="section-box">
     <div class="section-title">7. Customer Journey & Interaction Flow</div>
     <div class="mermaid-wrapper">
-      <div class="mermaid">
-      flowchart TD
-        A[Land on Velour Essence App] --> B{Select Entry Path}
-        B -->|Option 1| C[Take Olfactory Profiling Quiz]
-        B -->|Option 2| D[Directly Enter Scent Creation Studio]
-        
-        C -->|Match Scent Persona| D
-        
-        D --> E[Blend Top, Heart & Base Note Ratios]
-        E --> F[Add Custom Engraving Text & Bottle Size]
-        F --> G[Save Blend to Personal Recipe Vault]
-        
-        G --> H{User Logged In?}
-        H -->|No| I[Register / Login via Supabase Auth]
-        H -->|Yes| J[Add Custom Blend to Shopping Cart]
-        I --> J
-        
-        J --> K[Proceed to VIP Checkout]
-        K --> L[Redirect to PayFast Gateway]
-        L --> M{Payment Approved?}
-        
-        M -->|Failed| N[Display Payment Failure & Retry Options]
-        M -->|Success| O[Update Order Status to 'Blending']
-        
-        O --> P[Send WhatsApp Order Confirmation Alert]
-        O --> Q[Stream Realtime Updates to Dashboard]
-        O --> R[Credit Loyalty Points to User Tier]
+      <div class="mermaid-controls">
+        <button onclick="zoomMermaid(this, 1.2)">+ Zoom</button>
+        <button onclick="zoomMermaid(this, 0.8)">- Zoom</button>
+        <button onclick="resetMermaid(this)">Reset</button>
+      </div>
+      <div class="mermaid-viewport">
+        <div class="mermaid">
+        flowchart TD
+          Start["Land on Velour Essence App"] --> EntryPath{"Select Entry Path"}
+          
+          EntryPath -->|Option 1| Quiz["Take Olfactory Profiling Quiz"]
+          EntryPath -->|Option 2| Studio["Directly Enter Scent Creation Studio"]
+          
+          Quiz -->|Match Persona| Studio
+          
+          Studio --> Blend["Blend Top, Heart & Base Note Ratios"]
+          Blend --> Engrave["Add Custom Engraving Text & Bottle Size"]
+          Engrave --> Save["Save Blend to Personal Recipe Vault"]
+          
+          Save --> AuthCheck{"User Logged In?"}
+          AuthCheck -->|No| Auth["Register / Login via Supabase Auth"]
+          AuthCheck -->|Yes| Cart["Add Custom Blend to Shopping Cart"]
+          Auth --> Cart
+          
+          Cart --> Checkout["Proceed to VIP Checkout"]
+          Checkout --> PayFast["Redirect to PayFast Gateway"]
+          PayFast --> PaymentCheck{"Payment Approved?"}
+          
+          PaymentCheck -->|Failed| Failure["Display Payment Failure & Retry Options"]
+          PaymentCheck -->|Success| Success["Update Order Status to 'Blending'"]
+          
+          Success --> WhatsApp["Send WhatsApp Order Confirmation Alert"]
+          Success --> Dashboard["Stream Realtime Updates to Dashboard"]
+          Success --> Points["Credit Loyalty Points to User Tier"]
 
-        style A fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
-        style D fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
-        style O fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
-        style L fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:3px
+          style Start fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
+          style Studio fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
+          style Success fill:#3D0C13,color:#FFFFFF,stroke:#C5A059,stroke-width:3px
+          style PayFast fill:#F4EAD8,color:#3D0C13,stroke:#C5A059,stroke-width:3px
+        </div>
       </div>
     </div>
     <div class="diagram-explanation">
@@ -658,30 +724,37 @@
   <div class="section-box">
     <div class="section-title">8. End-to-End System Sequence Diagram</div>
     <div class="mermaid-wrapper">
-      <div class="mermaid">
-      sequenceDiagram
-        autonumber
-        actor Customer as Customer (Browser)
-        participant WebApp as Web App (GitHub Pages)
-        participant Supabase as Supabase Cloud
-        participant PayFast as PayFast Gateway
-        actor LabAdmin as Laboratory Staff
-        participant WhatsApp as WhatsApp API
+      <div class="mermaid-controls">
+        <button onclick="zoomMermaid(this, 1.2)">+ Zoom</button>
+        <button onclick="zoomMermaid(this, 0.8)">- Zoom</button>
+        <button onclick="resetMermaid(this)">Reset</button>
+      </div>
+      <div class="mermaid-viewport">
+        <div class="mermaid">
+        sequenceDiagram
+          autonumber
+          actor Customer as Customer (Browser)
+          participant WebApp as Web App (GitHub Pages)
+          participant Supabase as Supabase Cloud
+          participant PayFast as PayFast Gateway
+          actor LabAdmin as Laboratory Staff
+          participant WhatsApp as WhatsApp API
 
-        Customer->>WebApp: 1. Customizes scent formula in Studio
-        WebApp->>Supabase: 2. Save formula (JSONB) via REST API
-        Supabase-->>WebApp: 3. Return unique Formula ID
-        Customer->>WebApp: 4. Initiates Checkout Process
-        WebApp->>Supabase: 5. Create Order Record (Status = 'Pending')
-        WebApp->>PayFast: 6. Redirect Customer to PayFast Session
-        Customer->>PayFast: 7. Complete Payment Transaction
-        PayFast-->>Supabase: 8. ITN Callback Webhook (Payment Verified)
-        Supabase->>Supabase: 9. Set Status = 'Blending' & Calculate Points
-        Supabase-->>LabAdmin: 10. Push new order to Mix Sheet Queue (WebSockets)
-        Supabase->>WhatsApp: 11. Trigger Order Confirmation Alert
-        WhatsApp-->>Customer: 12. Receive WhatsApp Dispatch Notification
-        LabAdmin->>Supabase: 13. Mark Order as 'Dispatched'
-        Supabase-->>WebApp: 14. Live WebSocket update on Customer Dashboard
+          Customer->>WebApp: Customizes scent formula in Studio
+          WebApp->>Supabase: Save formula (JSONB) via REST API
+          Supabase-->>WebApp: Return unique Formula ID
+          Customer->>WebApp: Initiates Checkout Process
+          WebApp->>Supabase: Create Order Record (Status = 'Pending')
+          WebApp->>PayFast: Redirect Customer to PayFast Session
+          Customer->>PayFast: Complete Payment Transaction
+          PayFast-->>Supabase: ITN Callback Webhook (Payment Verified)
+          Supabase->>Supabase: Set Status = 'Blending' & Calculate Points
+          Supabase-->>LabAdmin: Push new order to Mix Sheet Queue (WebSockets)
+          Supabase->>WhatsApp: Trigger Order Confirmation Alert
+          WhatsApp-->>Customer: Receive WhatsApp Dispatch Notification
+          LabAdmin->>Supabase: Mark Order as 'Dispatched'
+          Supabase-->>WebApp: Live WebSocket update on Customer Dashboard
+        </div>
       </div>
     </div>
     <div class="diagram-explanation">
@@ -829,6 +902,32 @@
   </footer>
 
 </div>
+
+<!-- Interactive Zoom/Reset Controls Script -->
+<script>
+  function zoomMermaid(button, factor) {
+    const wrapper = button.closest('.mermaid-wrapper');
+    const target = wrapper.querySelector('.mermaid');
+    
+    let currentScale = parseFloat(target.getAttribute('data-scale') || '1');
+    currentScale *= factor;
+    
+    // Set boundaries for scale
+    if (currentScale < 0.4) currentScale = 0.4;
+    if (currentScale > 3.0) currentScale = 3.0;
+    
+    target.style.transform = `scale(${currentScale})`;
+    target.setAttribute('data-scale', currentScale);
+  }
+
+  function resetMermaid(button) {
+    const wrapper = button.closest('.mermaid-wrapper');
+    const target = wrapper.querySelector('.mermaid');
+    
+    target.style.transform = 'scale(1)';
+    target.setAttribute('data-scale', '1');
+  }
+</script>
 
 </body>
 </html>
